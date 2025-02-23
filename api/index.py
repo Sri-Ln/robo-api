@@ -7,6 +7,13 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"  # Allow all origins (Change this to restrict)
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return response
+    
 # Load data once to avoid reading it multiple times on each request
 allData = pd.read_csv('updated_crime_rates.csv')
 cleanedData = allData.dropna()
